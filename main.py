@@ -46,9 +46,9 @@ def refresh_buttons():
             btn = ttk.Button(app, text=name, bootstyle="info-outline", width=32, command=lambda url=url: open_link(url))
             btn.pack(pady=5)
     else:
-        ttk.Label(app, text="✨ No links yet — add some!", font=("Helvetica", 12, "italic")).pack(pady=60)
+        ttk.Label(app, text="No links yet — add some!", font=("Helvetica", 15, "italic")).pack(pady=60)
 
-    ttk.Label(app, text="Press M to open menu", font=("Arial", 10), anchor="center").pack(side="bottom", pady=10)
+    ttk.Label(app, text="Press M to open menu", font=("Arial", 13), anchor="center").pack(side="bottom", pady=10)
 
 def open_menu():
     menu = ttk.Toplevel(app)
