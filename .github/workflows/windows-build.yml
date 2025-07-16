@@ -22,9 +22,9 @@ jobs:
         run: |
           pip install pyinstaller ttkbootstrap
 
-      - name: Build EXE with PyInstaller
+      - name: Build EXE
         run: |
-          pyinstaller --onefile --noconsole --add-data "links.json;." --icon=icon.ico main.py
+          pyinstaller --onefile --noconsole --add-data "links.json;." main.py
 
       - name: Upload EXE
         uses: actions/upload-artifact@v3
