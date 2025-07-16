@@ -1,0 +1,33 @@
+name: Build Windows EXE
+
+on:
+  push:
+    paths:
+      - '**.py'
+      - 'links.json'
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install pyinstaller ttkbootstrap
+
+      - name: Build EXE with PyInstaller
+        run: |
+          pyinstaller --onefile --noconsole --add-data "links.json;." --icon=icon.ico main.py
+
+      - name: Upload EXE
+        uses: actions/upload-artifact@v3
+        with:
+          name: QuickLaunch-Windows
+          path: dist/main.exe
