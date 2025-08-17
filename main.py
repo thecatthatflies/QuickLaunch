@@ -16,9 +16,30 @@ MAX_LINKS = 20
 THEMES = ["morph", "darkly", "superhero", "solar", "litera", "cyborg", "pulse", "flatly", "journal", "minty"]
 
 def load_links():
+    """Load stored links from ``LINKS_FILE``.
+
+    The previous implementation assumed that the JSON file always
+    contained valid data. If the file was corrupted or manually edited
+    with invalid JSON, ``json.load`` would raise ``JSONDecodeError`` at
+    application start-up and crash the program.  Since this function is
+    called during module import, the entire application would fail to
+    launch.
+
+    To make the launcher more robust we catch ``JSONDecodeError`` and
+    return an empty dictionary when the file cannot be parsed.  This
+    allows the application to start with a clean state instead of
+    crashing.
+    """
+
     if os.path.exists(LINKS_FILE):
-        with open(LINKS_FILE, "r") as f:
-            return json.load(f)
+        try:
+            with open(LINKS_FILE, "r") as f:
+                data = json.load(f)
+                if isinstance(data, dict):
+                    return data
+        except json.JSONDecodeError:
+            # Corrupted file – ignore and return empty dict
+            pass
     return {}
 
 def save_links():
