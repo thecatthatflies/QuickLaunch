@@ -1,7 +1,7 @@
 QUICKLAUNCH APP – README
 
 Version: 1.0  
-Author: Aiyan  
+Author: thecatthatflies  
 Date: July 2025
 
 -------------------------------
